@@ -1,0 +1,23 @@
+{
+  "overview": "A full-stack web-based Automated Attendance & Payroll System. Manage employees, track biometric attendance (simulated), calculate monthly salary with overtime, and handle advance salary requests with admin approval — all in the browser with persistent data.",
+  "features": [
+    "Employee management with CRUD: add, edit, soft-delete, search",
+    "Biometric attendance simulation: check-in/check-out by ID scan with time tracking",
+    "Manual attendance entry with date, check-in, and check-out times",
+    "Automatic overtime calculation (hours beyond 8/day at 1.5x rate)",
+    "Monthly salary statement: basic pay, overtime, advance deductions, net salary",
+    "Advance salary requests with repayment schedule and admin approval workflow",
+    "Role-based access: HR admins manage employees, process payroll, and approve advances",
+    "Attendance and employee filters with URL search param persistence"
+  ],
+  "category": "productivity",
+  "tags": [
+    "hr",
+    "payroll",
+    "attendance",
+    "employee-management",
+    "admin",
+    "dashboard"
+  ],
+  "last_updated": "2026-05-01T17:34:57.104Z"
+}

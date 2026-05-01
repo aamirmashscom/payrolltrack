@@ -1,0 +1,170 @@
+type UpdateEmployee = 
+ record {
+   base_salary: float64;
+   biometric_id: text;
+   department: text;
+   designation: text;
+   emp_code: text;
+   joining_date: text;
+   name: text;
+ };
+type SalaryRecord = 
+ record {
+   absent_days: int;
+   advance_deduction: float64;
+   basic_earned: float64;
+   emp_id: nat;
+   month_year: text;
+   net_salary: float64;
+   overtime_amount: float64;
+   present_days: int;
+   processed_date: text;
+   salary_id: nat;
+ };
+type SalaryInput = 
+ record {
+   absent_days: int;
+   advance_deduction: float64;
+   basic_earned: float64;
+   emp_id: nat;
+   month_year: text;
+   net_salary: float64;
+   overtime_amount: float64;
+   present_days: int;
+ };
+type SalaryCalculation = 
+ record {
+   absent_days: int;
+   advance_deduction: float64;
+   base_salary: float64;
+   basic_earned: float64;
+   days_in_month: int;
+   emp_id: nat;
+   emp_name: text;
+   month_year: text;
+   net_salary: float64;
+   overtime_amount: float64;
+   present_days: int;
+   total_overtime_hours: float64;
+ };
+type Result_3 = 
+ variant {
+   err: text;
+   ok: SalaryCalculation;
+ };
+type Result_2 = 
+ variant {
+   err: text;
+   ok: text;
+ };
+type Result_1 = 
+ variant {
+   err: text;
+   ok: nat;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok;
+ };
+type NewEmployee = 
+ record {
+   base_salary: float64;
+   biometric_id: text;
+   department: text;
+   designation: text;
+   emp_code: text;
+   joining_date: text;
+   name: text;
+ };
+type Employee = 
+ record {
+   base_salary: float64;
+   biometric_id: text;
+   department: text;
+   designation: text;
+   emp_code: text;
+   emp_id: nat;
+   joining_date: text;
+   name: text;
+   status: text;
+ };
+type AttendanceRecord = 
+ record {
+   attendance_id: nat;
+   check_in: opt text;
+   check_out: opt text;
+   date: text;
+   emp_id: nat;
+   emp_name: text;
+   overtime_hours: float64;
+   status: text;
+   total_hours: float64;
+ };
+type Attendance = 
+ record {
+   attendance_id: nat;
+   check_in: opt text;
+   check_out: opt text;
+   date: text;
+   emp_id: nat;
+   overtime_hours: float64;
+   status: text;
+   total_hours: float64;
+ };
+type AdvanceRequestWithName = 
+ record {
+   advance_id: nat;
+   amount: float64;
+   approved_date: opt text;
+   emp_id: nat;
+   emp_name: text;
+   monthly_deduction: float64;
+   reason: text;
+   repayment_months: int;
+   request_date: text;
+   status: text;
+   total_repaid: float64;
+ };
+type AdvanceRequest = 
+ record {
+   advance_id: nat;
+   amount: float64;
+   approved_date: opt text;
+   emp_id: nat;
+   monthly_deduction: float64;
+   reason: text;
+   repayment_months: int;
+   request_date: text;
+   status: text;
+   total_repaid: float64;
+ };
+service : {
+  addEmployee: (emp: NewEmployee) -> (Result_1);
+  approveAdvance: (advance_id: nat, approved_date: text) -> (Result);
+  calculateSalary: (emp_id: nat, month: text, year: text) -> (Result_3) query;
+  deleteEmployee: (emp_id: nat) -> (Result);
+  getAdvanceRequests: () -> (vec AdvanceRequestWithName) query;
+  getAdvanceRequestsByEmployee: (emp_id: nat) -> (vec AdvanceRequest) query;
+  getAllEmployees: () -> (vec Employee) query;
+  getAttendance: (from_date: opt text, to_date: opt text) ->
+   (vec AttendanceRecord) query;
+  getAttendanceByEmployee: (emp_id: nat, month: text, year: text) ->
+   (vec Attendance) query;
+  getEmployee: (emp_id: nat) -> (opt Employee) query;
+  getEmployeeByBiometricId: (bio_id: text) -> (opt Employee) query;
+  getEmployees: () -> (vec Employee) query;
+  getSalaryRecord: (emp_id: nat, month_year: text) ->
+   (opt SalaryRecord) query;
+  getSalaryRecords: () -> (vec SalaryRecord) query;
+  getTotalAdvanceDeduction: (emp_id: nat, month: text, year: text) ->
+   (float64) query;
+  markAttendance: (emp_id: nat, date: text, check_in: text, check_out:
+   text) -> (Result);
+  processBiometricScan: (bio_id: text, timestamp: text) -> (Result_2);
+  processSalary: (data: SalaryInput) -> (Result_1);
+  rejectAdvance: (advance_id: nat) -> (Result);
+  submitAdvanceRequest: (emp_id: nat, amount: float64, repayment_months: 
+   int, reason: text) -> (Result_1);
+  updateEmployee: (emp_id: nat, emp: UpdateEmployee) -> (Result);
+}

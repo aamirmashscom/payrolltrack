@@ -1,0 +1,82 @@
+// Version: 1.0.0
+type AdvanceRequest__632384220 =
+  {
+    advance_id : Nat;
+    amount : Float;
+    approved_date : ?Text;
+    emp_id : Nat;
+    monthly_deduction : Float;
+    reason : Text;
+    repayment_months : Int;
+    request_date : Text;
+    status : Text;
+    total_repaid : Float
+  };
+type Attendance__753881897 =
+  {
+    attendance_id : Nat;
+    check_in : ?Text;
+    check_out : ?Text;
+    date : Text;
+    emp_id : Nat;
+    overtime_hours : Float;
+    status : Text;
+    total_hours : Float
+  };
+type Employee__808965025 =
+  {
+    base_salary : Float;
+    biometric_id : Text;
+    department : Text;
+    designation : Text;
+    emp_code : Text;
+    emp_id : Nat;
+    joining_date : Text;
+    name : Text;
+    status : Text
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type SalaryRecord__869053899 =
+  {
+    absent_days : Int;
+    advance_deduction : Float;
+    basic_earned : Float;
+    emp_id : Nat;
+    month_year : Text;
+    net_salary : Float;
+    overtime_amount : Float;
+    present_days : Int;
+    processed_date : Text;
+    salary_id : Nat
+  };
+actor {
+  stable advances :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AdvanceRequest__632384220]];
+      var elementIndex : Nat__490723111
+    };
+  stable attendances :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Attendance__753881897]];
+      var elementIndex : Nat__490723111
+    };
+  stable employees :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Employee__808965025]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextAdvanceId : {var value : Nat};
+  stable nextAttendanceId : {var value : Nat};
+  stable nextEmpId : {var value : Nat};
+  stable nextSalaryId : {var value : Nat};
+  stable salaryRecords :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?SalaryRecord__869053899]];
+      var elementIndex : Nat__490723111
+    }
+};
